@@ -1075,6 +1075,14 @@ class InfiniteGridMenu {
   }
 }
 
+/**
+ * @typedef {Object} InfiniteMenuItem
+ * @property {string} image
+ * @property {string} link
+ * @property {string} title
+ * @property {string} description
+ */
+
 const defaultItems = [
   {
     image: "https://picsum.photos/900/900?grayscale",
@@ -1084,6 +1092,9 @@ const defaultItems = [
   },
 ];
 
+/**
+ * @param {{ items?: InfiniteMenuItem[]; scale?: number }} props
+ */
 export default function InfiniteMenu({ items = [], scale = 1.0 }) {
   const canvasRef = useRef(null);
   const [activeItem, setActiveItem] = useState(null);

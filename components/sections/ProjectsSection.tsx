@@ -131,7 +131,7 @@ interface ProjectsSectionProps {
   projects: Project[];
 }
 
-export function ProjectsSection({ projects }: ProjectsSectionProps) {
+export function ProjectsSection() {
   const sectionRef = useRef<HTMLDivElement>(null);
   const headerRef = useRef<HTMLDivElement>(null);
   const isHeaderInView = useInView(headerRef, { once: true, margin: "-80px" });
@@ -139,15 +139,19 @@ export function ProjectsSection({ projects }: ProjectsSectionProps) {
   const [filter, setFilter] = useState<string>("All");
   const categories = ["All", "Web Development", "AI Agent"];
 
-  const filtered =
-    filter === "All" ? projects : projects.filter((p) => p.category === filter);
-
   const { scrollYProgress } = useScroll({
     target: sectionRef,
     offset: ["start end", "end start"],
   });
   const bigTextX = useTransform(scrollYProgress, [0, 1], ["-5%", "5%"]);
-  const items = [
+  type InfiniteMenuItem = {
+    image: string;
+    link: string;
+    title: string;
+    description: string;
+  };
+
+  const items: InfiniteMenuItem[] = [
     {
       image: "https://picsum.photos/300/300?grayscale",
       link: "https://google.com/",

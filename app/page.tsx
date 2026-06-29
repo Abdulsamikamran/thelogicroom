@@ -88,7 +88,7 @@ export default function HomePage() {
         <CorridorSection />
 
         <div className="bg-black/60 backdrop-blur-md">
-          <ProjectsSection projects={projects} />
+          <ProjectsSection />
         </div>
 
         <div className="bg-black/65 backdrop-blur-sm">
