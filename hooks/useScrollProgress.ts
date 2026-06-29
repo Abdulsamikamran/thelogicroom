@@ -3,8 +3,12 @@
 import { useScroll, useTransform, MotionValue } from 'framer-motion'
 import { useRef } from 'react'
 
+type ScrollOffset = NonNullable<Parameters<typeof useScroll>[0]>['offset']
+
+const DEFAULT_SCROLL_OFFSET: ScrollOffset = ['start end', 'end start']
+
 export function useScrollProgress(
-  offset: [string, string] = ['start end', 'end start']
+  offset: ScrollOffset = DEFAULT_SCROLL_OFFSET
 ) {
   const ref = useRef<HTMLDivElement>(null)
   const { scrollYProgress } = useScroll({
