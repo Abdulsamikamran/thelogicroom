@@ -6,7 +6,7 @@ const TEAM = [
   {
     name: "Shayan Khan",
     role: "Founder & CEO",
-    image: "/shayan.png",
+    image: "https://i.scdn.co/image/ab67616d0000b273d9985092cd88bffd97653b58",
     desc: "Turns ambitious ideas into company roadmaps and somehow keeps everyone moving in the same direction. Known for asking 'what if we made it even better?' five minutes before launch.",
   },
   {
