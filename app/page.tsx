@@ -17,7 +17,6 @@ export default function HomePage() {
   const projects = [];
   const containerRef = useRef<HTMLDivElement>(null);
   const [modelsLoaded, setModelsLoaded] = useState(false);
-  const [introDone, setIntroDone] = useState(false);
 
   const { scrollYProgress } = useScroll({
     target: containerRef,
@@ -54,55 +53,50 @@ export default function HomePage() {
     };
   }, []);
 
-  // 1. show intro only
-  if (!introDone) {
-    return <TLRIntro onComplete={() => setIntroDone(true)} />;
-  }
+  const showLoader = !modelsLoaded;
 
-  // 2. intro is gone, but models still loading: show clean black screen
-  if (!modelsLoaded) {
-    return <div className="fixed inset-0 bg-black" />;
-  }
-
-  // 3. only now mount heavy content
   return (
-    <div
-      ref={containerRef}
-      className="relative min-h-screen bg-black text-white"
-    >
-      <div className="fixed inset-0 w-full h-screen z-0 pointer-events-none">
-        <Scene scrollYProgress={scrollYProgress} />
+    <>
+      <div
+        ref={containerRef}
+        className="relative min-h-screen bg-black text-white"
+      >
+        <div className="fixed inset-0 w-full h-screen z-0 pointer-events-none">
+          <Scene scrollYProgress={scrollYProgress} />
+        </div>
+
+        <div className="relative z-10">
+          <HeroSection />
+
+          <div className="bg-black/50 backdrop-blur-md">
+            <MarqueeSection />
+          </div>
+
+          <div className="bg-black/70 backdrop-blur-sm">
+            <ServicesSection />
+          </div>
+
+          <CorridorSection />
+
+          <div className="bg-black/60 backdrop-blur-md">
+            <ProjectsSection />
+          </div>
+
+          <div className="bg-black/65 backdrop-blur-sm">
+            <AboutSection />
+          </div>
+
+          <div className="bg-black/65 backdrop-blur-sm">
+            <TeamSection />
+          </div>
+
+          <div className="bg-black/80 backdrop-blur-lg">
+            <ContactSection />
+          </div>
+        </div>
       </div>
 
-      <div className="relative z-10">
-        <HeroSection />
-
-        <div className="bg-black/50 backdrop-blur-md">
-          <MarqueeSection />
-        </div>
-
-        <div className="bg-black/70 backdrop-blur-sm">
-          <ServicesSection />
-        </div>
-
-        <CorridorSection />
-
-        <div className="bg-black/60 backdrop-blur-md">
-          <ProjectsSection />
-        </div>
-
-        <div className="bg-black/65 backdrop-blur-sm">
-          <AboutSection />
-        </div>
-
-        <div className="bg-black/65 backdrop-blur-sm">
-          <TeamSection />
-        </div>
-
-        <div className="bg-black/80 backdrop-blur-lg">
-          <ContactSection />
-        </div>
-      </div>
-    </div>
+      <TLRIntro visible={showLoader} />
+    </>
   );
 }

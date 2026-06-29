@@ -202,3 +202,17 @@ html.lenis body {
 .scrollbar-none::-webkit-scrollbar {
   display: none;
 }
+
+/* loading bar animation */
+.loading-bar {
+  animation: loadingBar 1.35s ease-in-out infinite;
+}
+
+@keyframes loadingBar {
+  0% {
+    transform: translateX(-140%);
+  }
+  100% {
+    transform: translateX(320%);
+  }
+}

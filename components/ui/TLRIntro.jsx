@@ -1,161 +1,166 @@
 "use client";
-import { useEffect, useRef } from "react";
+import { useEffect, useState } from "react";
 
-export default function TLRIntro({ onComplete, duration = 3350 }) {
-  const onCompleteRef = useRef(onComplete);
-
-  useEffect(() => {
-    onCompleteRef.current = onComplete;
-  }, [onComplete]);
+export default function TLRIntro({ visible = true }) {
+  const [isExiting, setIsExiting] = useState(false);
+  const [mounted, setMounted] = useState(true);
 
   useEffect(() => {
-    const id = window.setTimeout(() => {
-      onCompleteRef.current?.();
-    }, duration);
+    if (!visible) {
+      // Step 1 & 2: Instantly start filling the bar and triggering the slide-up
+      setIsExiting(true);
 
-    return () => window.clearTimeout(id);
-  }, [duration]);
+      // Step 3: Completely unmount after the 900ms CSS slide animation finishes
+      const unmountTimer = setTimeout(() => {
+        setMounted(false);
+      }, 950); // Matches your 0.9s transition + a small buffer
+
+      return () => clearTimeout(unmountTimer);
+    }
+  }, [visible]);
+
+  if (!mounted) return null;
 
   return (
     <>
-      <div className="tlr-intro" aria-hidden="true">
+      <div
+        className={`tlr-intro ${isExiting ? "tlr-intro--exit" : ""}`}
+        aria-hidden={isExiting}
+      >
         <div className="tlr-logo">
           <span className="tlr-letter tlr-t">T</span>
           <span className="tlr-letter tlr-l">L</span>
           <span className="tlr-letter tlr-r">R</span>
-          <div className="tlr-underline" />
         </div>
 
-        <div className="tlr-wipe" />
+        <div className={`tlr-bar-wrap ${isExiting ? "tlr-filling" : ""}`}>
+          <span className="tlr-bar-sweep" />
+          <span
+            className="tlr-bar-fill"
+            style={{
+              width: isExiting ? "100%" : "0%",
+            }}
+          />
+        </div>
       </div>
 
       <style jsx global>{`
         .tlr-intro {
           position: fixed;
           inset: 0;
-          z-index: 9999;
-          overflow: hidden;
-          background: #0a0a0a;
+          z-index: 10050;
+          background: #080808;
+          display: flex;
+          flex-direction: column;
+          align-items: center;
+          justify-content: center;
+          gap: 3rem;
+          will-change: transform, opacity;
+          pointer-events: auto;
+          transform: translateY(0);
+          opacity: 1;
+
+          /* The transition is baked right into the component base */
+          transition:
+            transform 0.9s cubic-bezier(0.76, 0, 0.24, 1),
+            opacity 0.9s ease;
+        }
+
+        /* When this class is appended, it smoothly transitions */
+        .tlr-intro--exit {
+          transform: translateY(-100%);
+          opacity: 0;
           pointer-events: none;
         }
 
         .tlr-logo {
-          position: absolute;
-          left: 50%;
-          top: 50%;
-          transform: translate(-50%, -50%);
           display: flex;
-          align-items: center;
-          gap: 0.06em;
-          font-family:
-            Inter,
-            Helvetica Neue,
-            Arial,
-            sans-serif;
-          font-size: clamp(72px, 18vw, 180px);
+          align-items: baseline;
+          gap: 0.04em;
+          font-family: Inter, "Helvetica Neue", Arial, sans-serif;
+          font-size: clamp(80px, 18vw, 160px);
           font-weight: 700;
-          line-height: 1;
           letter-spacing: -0.04em;
-          animation: tlrLogoHide 120ms linear forwards 2520ms;
+          line-height: 1;
         }
 
         .tlr-letter {
           opacity: 0;
-          transform: translateY(24px);
+          transform: translateY(20px);
           will-change: transform, opacity;
-          animation: tlrIn 700ms cubic-bezier(0.22, 1, 0.36, 1) forwards;
+          animation: tlrUp 800ms cubic-bezier(0.22, 1, 0.36, 1) forwards;
         }
 
         .tlr-t {
-          color: #fff;
-          text-shadow: 0 0 14px rgba(255, 255, 255, 0.16);
+          color: #ffffff;
           animation-delay: 0ms;
         }
-
         .tlr-l {
           color: #e8610a;
-          text-shadow: 0 0 14px rgba(232, 97, 10, 0.22);
-          animation-delay: 220ms;
+          animation-delay: 180ms;
         }
-
         .tlr-r {
-          color: #fff;
-          text-shadow: 0 0 14px rgba(255, 255, 255, 0.16);
-          animation-delay: 440ms;
+          color: #ffffff;
+          animation-delay: 360ms;
         }
 
-        .tlr-underline {
-          position: absolute;
-          left: -12%;
-          right: -12%;
-          bottom: -0.14em;
-          height: 2px;
-          background: rgba(232, 97, 10, 0.12);
+        .tlr-bar-wrap {
+          position: relative;
+          width: 120px;
+          height: 1px;
+          background: rgba(255, 255, 255, 0.08);
+          overflow: hidden;
           opacity: 0;
-          transform-origin: center;
-          animation:
-            tlrLineIn 300ms ease forwards 1300ms,
-            tlrLinePulse 900ms ease-in-out infinite 1600ms;
+          animation: tlrFadeIn 300ms ease forwards 900ms;
         }
 
-        .tlr-wipe {
+        .tlr-bar-sweep {
+          display: block;
           position: absolute;
-          top: -35vh;
-          left: -60vw;
-          width: 42vw;
-          height: 170vh;
-          background: #0a0a0a;
-          transform: rotate(-10deg);
-          will-change: transform;
-          animation: tlrWipe 850ms cubic-bezier(0.55, 0.055, 0.675, 0.19)
-            forwards 2500ms;
+          inset: 0;
+          width: 50%;
+          background: linear-gradient(90deg, transparent, #e8610a, transparent);
+          animation: tlrSweep 1.4s ease-in-out infinite;
+          transition: opacity 0.3s ease;
+          opacity: 1;
         }
 
-        .tlr-wipe::after {
-          content: "";
+        .tlr-bar-fill {
+          display: block;
           position: absolute;
-          top: 0;
-          right: -2px;
-          width: 2px;
-          height: 100%;
+          inset: 0;
+          width: 0%;
           background: #e8610a;
-          box-shadow: 0 0 16px rgba(232, 97, 10, 0.7);
+          transition: width 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+          opacity: 0;
         }
 
-        @keyframes tlrIn {
+        .tlr-filling .tlr-bar-sweep {
+          opacity: 0;
+          animation: none;
+        }
+
+        .tlr-filling .tlr-bar-fill {
+          opacity: 1;
+        }
+
+        @keyframes tlrUp {
           to {
             opacity: 1;
             transform: translateY(0);
           }
         }
-
-        @keyframes tlrLineIn {
+        @keyframes tlrFadeIn {
           to {
             opacity: 1;
           }
         }
-
-        @keyframes tlrLinePulse {
-          0%,
+        @keyframes tlrSweep {
+          0% {
+            transform: translateX(-140%);
+          }
           100% {
-            opacity: 0.07;
-            transform: scaleX(1);
-          }
-          50% {
-            opacity: 0.12;
-            transform: scaleX(1.03);
-          }
-        }
-
-        @keyframes tlrWipe {
-          to {
-            transform: translateX(190vw) rotate(-10deg);
-          }
-        }
-
-        @keyframes tlrLogoHide {
-          to {
-            opacity: 0;
+            transform: translateX(320%);
           }
         }
       `}</style>
