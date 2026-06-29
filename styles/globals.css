@@ -1,0 +1,204 @@
+@import url('https://fonts.googleapis.com/css2?family=Bebas+Neue&family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;1,9..40,300&family=JetBrains+Mono:wght@300;400&display=swap');
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  --font-display: 'Bebas Neue', serif;
+  --font-body: 'DM Sans', sans-serif;
+  --font-mono: 'JetBrains Mono', monospace;
+
+  --color-black: #0a0a0a;
+  --color-white: #ffffff;
+  --color-orange: #ff6b00;
+  --color-orange-glow: rgba(255, 107, 0, 0.15);
+  --color-gray-dark: #1a1a1a;
+  --color-gray-mid: #2a2a2a;
+  --color-gray-muted: #4a4a4a;
+  --color-gray-text: #a0a0a0;
+}
+
+/* ─── Reset & Base ──────────────────────────────────────────────────────── */
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+html {
+  background-color: var(--color-black);
+  color: var(--color-white);
+  font-family: var(--font-body);
+  /* clip (not hidden) — hidden on html+body breaks position:sticky */
+  overflow-x: clip;
+  scroll-behavior: auto; /* Lenis handles this */
+}
+
+body {
+  background-color: var(--color-black);
+  overflow-x: clip;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+/* ─── Scrollbar ─────────────────────────────────────────────────────────── */
+::-webkit-scrollbar {
+  width: 4px;
+}
+::-webkit-scrollbar-track {
+  background: var(--color-black);
+}
+::-webkit-scrollbar-thumb {
+  background: var(--color-orange);
+  border-radius: 2px;
+}
+
+/* ─── Selection ─────────────────────────────────────────────────────────── */
+::selection {
+  background: var(--color-orange);
+  color: var(--color-black);
+}
+
+/* ─── Custom Cursor ──────────────────────────────────────────────────────── */
+body {
+  cursor: none;
+}
+a,
+button {
+  cursor: none;
+}
+
+/* ─── Typography helpers ─────────────────────────────────────────────────── */
+.font-display {
+  font-family: var(--font-display);
+}
+.font-body {
+  font-family: var(--font-body);
+}
+.font-mono {
+  font-family: var(--font-mono);
+}
+
+/* ─── Clip reveal animation ──────────────────────────────────────────────── */
+.clip-reveal {
+  overflow: hidden;
+}
+.clip-reveal > * {
+  display: block;
+}
+
+/* ─── Orange glow utilities ──────────────────────────────────────────────── */
+.glow-orange {
+  box-shadow: 0 0 30px rgba(255, 107, 0, 0.4), 0 0 80px rgba(255, 107, 0, 0.2);
+}
+
+.glow-text-orange {
+  text-shadow: 0 0 40px rgba(255, 107, 0, 0.8);
+}
+
+/* ─── Grid background ────────────────────────────────────────────────────── */
+.bg-grid {
+  background-image: linear-gradient(
+      rgba(255, 255, 255, 0.025) 1px,
+      transparent 1px
+    ),
+    linear-gradient(90deg, rgba(255, 255, 255, 0.025) 1px, transparent 1px);
+  background-size: 80px 80px;
+}
+
+/* ─── Noise overlay ──────────────────────────────────────────────────────── */
+.noise-overlay::after {
+  content: '';
+  position: fixed;
+  inset: 0;
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)' opacity='0.04'/%3E%3C/svg%3E");
+  pointer-events: none;
+  z-index: 9999;
+  opacity: 0.4;
+  mix-blend-mode: overlay;
+}
+
+/* ─── Marquee ────────────────────────────────────────────────────────────── */
+.marquee-container {
+  overflow: hidden;
+  white-space: nowrap;
+}
+.marquee-track {
+  display: inline-flex;
+  animation: marquee 30s linear infinite;
+}
+.marquee-track:hover {
+  animation-play-state: paused;
+}
+
+@keyframes marquee {
+  0% {
+    transform: translateX(0);
+  }
+  100% {
+    transform: translateX(-50%);
+  }
+}
+
+/* ─── Orange line accent ─────────────────────────────────────────────────── */
+.orange-line {
+  position: relative;
+}
+.orange-line::after {
+  content: '';
+  position: absolute;
+  bottom: -2px;
+  left: 0;
+  width: 0%;
+  height: 2px;
+  background: var(--color-orange);
+  transition: width 0.4s ease;
+}
+.orange-line:hover::after {
+  width: 100%;
+}
+
+/* ─── Section divider ────────────────────────────────────────────────────── */
+.section-divider {
+  width: 100%;
+  height: 1px;
+  background: linear-gradient(
+    90deg,
+    transparent,
+    rgba(255, 107, 0, 0.4),
+    transparent
+  );
+}
+
+/* ─── Lenis HTML class ───────────────────────────────────────────────────── */
+html.lenis,
+html.lenis body {
+  height: auto;
+}
+
+.lenis.lenis-smooth {
+  scroll-behavior: auto !important;
+}
+
+.lenis.lenis-smooth [data-lenis-prevent] {
+  overscroll-behavior: contain;
+}
+
+.lenis.lenis-stopped {
+  overflow: hidden;
+}
+
+.lenis.lenis-scrolling iframe {
+  pointer-events: none;
+}
+/* scroll bar of our team */
+.scrollbar-none {
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+}
+.scrollbar-none::-webkit-scrollbar {
+  display: none;
+}

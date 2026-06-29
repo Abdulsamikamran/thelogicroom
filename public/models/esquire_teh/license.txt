@@ -1,0 +1,11 @@
+Model Information:
+* title:	Esquire Teh
+* source:	https://sketchfab.com/3d-models/esquire-teh-c2a08863f7d14f529d0766d0519493b8
+* author:	SamTheCaribbean (https://sketchfab.com/SamTheCaribbean)
+
+Model License:
+* license type:	CC-BY-4.0 (http://creativecommons.org/licenses/by/4.0/)
+* requirements:	Author must be credited. Commercial use is allowed.
+
+If you use this 3D model in your project be sure to copy paste this credit wherever you share it:
+This work is based on "Esquire Teh" (https://sketchfab.com/3d-models/esquire-teh-c2a08863f7d14f529d0766d0519493b8) by SamTheCaribbean (https://sketchfab.com/SamTheCaribbean) licensed under CC-BY-4.0 (http://creativecommons.org/licenses/by/4.0/)
