@@ -18,13 +18,13 @@ const TEAM = [
   {
     name: "Mubeen",
     role: "Chief AI Officer (CAIO)",
-    image: "https://i.scdn.co/image/ab67616d0000b273d9985092cd88bffd97653b58",
+    image: "/mubeen.jpeg",
     desc: "Teaches machines to think and occasionally reminds humans to do the same.",
   },
   {
     name: "Abdul Sami",
     role: "Chief Design Officer (CDO)",
-    image: "https://i.scdn.co/image/ab67616d0000b273d9985092cd88bffd97653b58",
+    image: "/sami.jpeg",
     desc: "Makes pixels behave and interfaces look effortless.",
   },
 ];
