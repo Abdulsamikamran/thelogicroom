@@ -6,13 +6,13 @@ const TEAM = [
   {
     name: "Shayan Khan",
     role: "Founder & CEO",
-    image: "https://i.scdn.co/image/ab67616d0000b273d9985092cd88bffd97653b58",
+    image: "shayanmeme.jpg",
     desc: "Turns ambitious ideas into company roadmaps and somehow keeps everyone moving in the same direction. Known for asking 'what if we made it even better?' five minutes before launch.",
   },
   {
     name: "Ibtisam",
     role: "Chief Technology Officer (CTO)",
-    image: "https://i.scdn.co/image/ab67616d0000b273d9985092cd88bffd97653b58",
+    image: "ibtmeme.jpg",
     desc: "Architect of complex systems, destroyer of production bugs, and collector of tabs with documentation nobody else knew existed.",
   },
   {
