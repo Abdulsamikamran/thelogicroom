@@ -82,6 +82,34 @@ button {
   font-family: var(--font-mono);
 }
 
+/* ─── TLR logo (splash + navbar) ─────────────────────────────────────────── */
+.tlr-logo {
+  font-family: Inter, "Helvetica Neue", Arial, sans-serif;
+}
+
+.tlr-logo-letter {
+  opacity: 0;
+  transform: translateY(20px);
+  animation: tlrUp 800ms cubic-bezier(0.22, 1, 0.36, 1) forwards;
+}
+
+.tlr-logo-t {
+  animation-delay: 0ms;
+}
+.tlr-logo-l {
+  animation-delay: 180ms;
+}
+.tlr-logo-r {
+  animation-delay: 360ms;
+}
+
+@keyframes tlrUp {
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
 /* ─── Clip reveal animation ──────────────────────────────────────────────── */
 .clip-reveal {
   overflow: hidden;

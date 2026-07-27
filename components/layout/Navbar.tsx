@@ -3,6 +3,7 @@
 import { useEffect, useState } from 'react'
 import { motion, AnimatePresence, useScroll, useMotionValueEvent } from 'framer-motion'
 import Link from 'next/link'
+import { TLRLogo } from '@/components/ui/TLRLogo'
 
 const navItems = [
   { label: 'Services', href: '#services' },
@@ -49,17 +50,10 @@ export function Navbar() {
           {/* Logo */}
           <Link href="/" className="relative z-10 group">
             <motion.div
-              className="flex items-center gap-3"
               whileHover={{ scale: 1.02 }}
               transition={{ duration: 0.2 }}
             >
-              <div className="w-8 h-8 relative">
-                <div className="absolute inset-0 border-2 border-orange-DEFAULT rotate-45 group-hover:rotate-[225deg] transition-transform duration-700" />
-                <div className="absolute inset-[5px] bg-orange-DEFAULT rotate-45 group-hover:rotate-[225deg] transition-transform duration-700 delay-75" />
-              </div>
-              <span className="font-display text-xl tracking-widest text-white uppercase">
-                The Logic Room
-              </span>
+              <TLRLogo variant="nav" />
             </motion.div>
           </Link>
 

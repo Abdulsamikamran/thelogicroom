@@ -36,6 +36,38 @@ const services = [
     ],
     accent: "#FF6B00",
   },
+  {
+    number: "03",
+    title: "Mobile Development",
+    subtitle: "Cross-Platform Apps",
+    description:
+      "We build stunning, native-feeling mobile experiences with Flutter. One codebase, two platforms — iOS and Android — without compromising on performance, animations, or feel.",
+    features: [
+      "Flutter & Dart for iOS & Android",
+      "Custom animations & gesture systems",
+      "Offline-first architecture",
+      "Push notifications & deep linking",
+      "App Store & Play Store deployment",
+      "BLoC / Riverpod state management",
+    ],
+    accent: "#FF6B00",
+  },
+  {
+    number: "04",
+    title: "Brand & Design",
+    subtitle: "Identity & Experience",
+    description:
+      "We shape how the world sees your product. From visual identity systems to motion design and interactive prototypes — we make sure your brand is impossible to ignore.",
+    features: [
+      "Logo & visual identity systems",
+      "UI/UX design & wireframing",
+      "Figma design systems & tokens",
+      "Motion design & micro-interactions",
+      "Brand guidelines & asset libraries",
+      "Usability testing & user research",
+    ],
+    accent: "#FF6B00",
+  },
 ];
 
 function ServiceCard({
@@ -173,7 +205,7 @@ export function ServicesSection() {
           </div>
         </div>
 
-        {/* Service cards */}
+        {/* Service cards — 2-col grid, wraps naturally for 4 cards */}
         <div className="grid grid-cols-1 md:grid-cols-2 gap-px bg-white/5">
           {services.map((service, i) => (
             <ServiceCard key={service.number} service={service} index={i} />
