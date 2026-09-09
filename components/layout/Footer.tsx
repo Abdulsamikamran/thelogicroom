@@ -2,6 +2,7 @@
 
 import { motion } from 'framer-motion'
 import Link from 'next/link'
+import { usePathname } from 'next/navigation'
 
 const links = [
   { label: 'Services', href: '#services' },
@@ -17,6 +18,9 @@ const socials = [
 ]
 
 export function Footer() {
+  const pathname = usePathname()
+  if (pathname?.startsWith('/tlr-vault-x7k9m2q')) return null
+
   return (
     <footer className="relative bg-black border-t border-white/5 overflow-hidden">
       {/* Subtle orange glow */}

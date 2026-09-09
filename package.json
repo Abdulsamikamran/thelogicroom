@@ -3,16 +3,19 @@
   "version": "0.1.0",
   "private": true,
   "scripts": {
-    "dev": "next dev",
-    "build": "next build",
-    "start": "next start",
+    "clean": "node -e \"try{require('fs').rmSync('.next',{recursive:true,force:true})}catch(e){}\"",
+    "dev": "node api.js && next dev",
+    "dev:clean": "npm run clean && next dev",
+    "build": "node api.js && next build",
+    "build:clean": "npm run clean && next build",
+    "start": "node api.js && next start",
     "lint": "next lint"
   },
   "dependencies": {
     "@google/model-viewer": "^4.3.0",
     "@react-three/drei": "^9.122.0",
     "@react-three/fiber": "^8.18.0",
-    "@supabase/supabase-js": "^2.44.4",
+    "@supabase/supabase-js": "^2.116.0",
     "@use-gesture/react": "^10.3.1",
     "framer-motion": "^11.3.8",
     "gl-matrix": "^3.4.4",

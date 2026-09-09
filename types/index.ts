@@ -1,24 +1,52 @@
 export interface Project {
-  id: string
+  id: number
   title: string
-  slug: string
-  category: string
   description: string
+  image: string
+  link: string
+  category: string
   tags: string[]
-  image_url: string | null
-  live_url: string | null
-  github_url: string | null
-  featured: boolean
-  year: number
+  year: string
+  order_index: number
   created_at: string
 }
 
 export interface Service {
-  id: string
+  id: number
+  number: string
   title: string
+  subtitle: string
   description: string
-  icon: string
   features: string[]
+  accent: string
+  order_index: number
+  created_at: string
+}
+
+export interface TitlePart {
+  text: string
+  orange: boolean
+}
+
+export interface NotableProduct {
+  id: number
+  tag: string
+  title: TitlePart[]
+  description: string
+  image: string
+  stats: string[]
+  order_index: number
+  created_at: string
+}
+
+export interface TeamMember {
+  id: number
+  name: string
+  role: string
+  image: string
+  desc: string
+  order_index: number
+  created_at: string
 }
 
 export interface NavItem {
