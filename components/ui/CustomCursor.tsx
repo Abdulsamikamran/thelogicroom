@@ -2,8 +2,11 @@
 
 import { useEffect, useRef, useState } from 'react'
 import { motion, useMotionValue, useSpring } from 'framer-motion'
+import { usePathname } from 'next/navigation'
 
 export function CustomCursor() {
+  const pathname = usePathname()
+  const isAdmin = pathname?.startsWith('/tlr-vault-x7k9m2q')
   const cursorX = useMotionValue(-100)
   const cursorY = useMotionValue(-100)
   const [hovered, setHovered] = useState(false)
@@ -53,6 +56,8 @@ export function CustomCursor() {
       document.removeEventListener('mouseout', handleLeave)
     }
   }, [cursorX, cursorY])
+
+  if (isAdmin) return null
 
   return (
     <>

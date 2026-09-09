@@ -3,6 +3,7 @@
 import { useEffect, useState } from 'react'
 import { motion, AnimatePresence, useScroll, useMotionValueEvent } from 'framer-motion'
 import Link from 'next/link'
+import { usePathname } from 'next/navigation'
 import { TLRLogo } from '@/components/ui/TLRLogo'
 
 const navItems = [
@@ -13,9 +14,11 @@ const navItems = [
 ]
 
 export function Navbar() {
+  const pathname = usePathname()
   const [scrolled, setScrolled] = useState(false)
   const [menuOpen, setMenuOpen] = useState(false)
   const { scrollY } = useScroll()
+  const isAdmin = pathname?.startsWith('/tlr-vault-x7k9m2q')
 
   useMotionValueEvent(scrollY, 'change', (latest) => {
     setScrolled(latest > 60)
@@ -31,6 +34,8 @@ export function Navbar() {
       document.body.style.overflow = ''
     }
   }, [menuOpen])
+
+  if (isAdmin) return null
 
   return (
     <>

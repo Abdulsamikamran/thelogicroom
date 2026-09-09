@@ -34,7 +34,7 @@ export function CorridorScene({
       <PerspectiveCamera makeDefault fov={45} />
       <ambientLight intensity={0.5} />
       <pointLight position={[0, 2, 0]} color="#ff6b1a" intensity={2} />
-      <Environment preset="night" />
+      <Environment files="/hdri/dikhololo_night_1k.hdr" />
       <CorridorModel progress={scrollProgress} />
     </Canvas>
   );

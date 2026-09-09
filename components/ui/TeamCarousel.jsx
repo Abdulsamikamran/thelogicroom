@@ -2,38 +2,7 @@
 import { useState, useRef, useEffect } from "react";
 import { motion } from "motion/react";
 
-const TEAM = [
-  {
-    name: "Shayan Khan",
-    role: "Founder & CEO",
-    image: "shayanjpeg.jpeg",
-    desc: "Turns wildly ambitious ideas into actual roadmaps and still finds time to ask, 'what if we made it even cooler?' five minutes before launch. Somehow chaos listens to him.",
-  },
-  {
-    name: "Talha Asif",
-    role: "Chief Operations Officer (COO)",
-    image: "/talha.jpeg",
-    desc: "Keeps the machine running smoothly, the timelines realistic, and the team from accidentally turning one task into a full-blown side quest.",
-  },
-  {
-    name: "Abdul Sami",
-    role: "Chief Technology Officer (CTO)",
-    image: "/sami.jpeg",
-    desc: "Architect of complex systems, hunter of mysterious bugs, and the reason production survives our ‘small quick changes’ that are never small or quick.",
-  },
-  {
-    name: "Ibtisam",
-    role: "Chief Business Development Officer (CBDO)",
-    image: "ibtesammain.png",
-    desc: "Can turn a casual conversation into a partnership, a handshake into a pipeline, and a vague client brief into a very confident ‘leave it with us.’",
-  },
-  {
-    name: "Mubeen",
-    role: "Chief Marketing Officer (CMO)",
-    image: "/mubeen.jpeg",
-    desc: "Makes brands louder, campaigns sharper, and analytics prettier. If conversions drop, he stares at dashboards until they feel personally responsible.",
-  },
-];
+/** @typedef {import('@/types').TeamMember} TeamMember */
 
 function TeamCard({ member }) {
   return (
@@ -84,7 +53,8 @@ function TeamCard({ member }) {
   );
 }
 
-export default function TeamCarousel() {
+/** @param {{ members: TeamMember[] }} props */
+export default function TeamCarousel({ members }) {
   const [current, setCurrent] = useState(0);
   const [dragConstraints, setDragConstraints] = useState({ left: 0, right: 0 });
   const [snapPoints, setSnapPoints] = useState([0]);
@@ -135,7 +105,7 @@ export default function TeamCarousel() {
       resizeObserver.disconnect();
       window.removeEventListener("resize", calc);
     };
-  }, []);
+  }, [members.length]);
 
   const next = () => {
     setCurrent((prev) => Math.min(prev + 1, snapPoints.length - 1));
@@ -206,8 +176,8 @@ export default function TeamCarousel() {
             whileTap={{ cursor: "grabbing" }}
             className="flex gap-8 cursor-grab active:cursor-grabbing touch-pan-y"
           >
-            {TEAM.map((member) => (
-              <TeamCard key={member.name} member={member} />
+            {members.map((member) => (
+              <TeamCard key={member.id} member={member} />
             ))}
           </motion.div>
         </div>
