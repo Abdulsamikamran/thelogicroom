@@ -155,7 +155,7 @@ export function AboutSection() {
         </div>
 
         {/* Process timeline */}
-        <div className="mt-32">
+        {/* <div className="mt-32">
           <motion.h3
             className="font-display text-5xl md:text-6xl text-white mb-16 tracking-tight"
             initial={{ opacity: 0, y: 30 }}
@@ -166,7 +166,6 @@ export function AboutSection() {
           </motion.h3>
 
           <div className="relative">
-            {/* Connecting line */}
             <div className="absolute left-[11px] md:left-1/2 top-0 bottom-0 w-px bg-white/5" />
 
             {[
@@ -199,7 +198,6 @@ export function AboutSection() {
                 viewport={{ once: true, margin: "-60px" }}
                 transition={{ duration: 0.7 }}
               >
-                {/* Step indicator */}
                 <div
                   className={`relative shrink-0 flex items-start ${i % 2 === 0 ? "" : "md:justify-end"} md:w-1/2`}
                 >
@@ -226,7 +224,7 @@ export function AboutSection() {
               </motion.div>
             ))}
           </div>
-        </div>
+        </div> */}
       </div>
     </section>
   );

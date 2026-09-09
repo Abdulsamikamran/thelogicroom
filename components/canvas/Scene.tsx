@@ -70,7 +70,7 @@ export function Scene({
         intensity={0.8}
         color="#4444ff"
       />
-      <Environment preset="city" />
+      <Environment files="/hdri/potsdamer_platz_1k.hdr" />
       <ContactShadows position={[0, -2, 0]} opacity={0.3} scale={10} blur={2} />
       <MechModel scrollYProgress={scrollYProgress} />
     </Canvas>
